@@ -1,0 +1,5 @@
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, PlainTextDocument)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeWords, c(stopwords("spanish")))
+corpus <- tm_map(corpus, stemDocument)
