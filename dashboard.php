@@ -1,5 +1,10 @@
 <?php
-    include('db/conexion.php');
+    session_start();
+    include('session.php');
+    if(!$_SESSION['ini_ses']){ 
+        echo '<script> alert("Se requiere inicio de sesion para acceder a este apartado");</script>';
+        echo '<script> window.location="index.php";</script>';
+    }
 ?>
 
 <!DOCTYPE html>

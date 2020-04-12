@@ -11,16 +11,6 @@
 </head>
 <body>
     <?php include('includes/nav.php') ?>
-    <form action="db/send_esp.php" method="POST">
-        <div class="input-field col s12 m12 l4">
-            <input  name="asd" id="nombres" type="text" class="validate" required>
-            <label for="nombres">Nombres</label>
-        </div>
-        <button class="btn green" type="submit" name="guardar">
-            Enviar
-            <i class="material-icons right">send</i>
-        </button>
-    </form>
     <div class="container"><br>
     <div class="card-panel blue-grey lighten-5">
         <div class="row">
@@ -72,7 +62,6 @@
                         </div>
                         <div class="input-field col s12">
                             <label for="descr">Cuentanos sobre ti...</label>
-                            <textarea placeholder="¿Que te motiva a ayudar las personas en esta situacion?" id="descr" class="materialize-textarea"></textarea>
                             <textarea name="descr" placeholder="¿Que te motiva a ayudar las personas en esta situacion?" id="descr" class="materialize-textarea"></textarea>
                         </div>
                     </div>
@@ -97,7 +86,7 @@
 <?php
 
 if(isset($_POST['guardar'])){ 
-    //if($_POST['nombres'] != "" && $_POST['apellido_p'] != "" && $_POST['apellido_m'] != "" && $_POST['email'] != "" && $_POST['profesion'] != "" && $_POST['exp_anios'] != "" && $_POST['area'] != ""  && $_POST['descr'] != ""){
+    if($_POST['nombres'] != "" && $_POST['apellido_p'] != "" && $_POST['apellido_m'] != "" && $_POST['email'] != "" && $_POST['profesion'] != "" && $_POST['exp_anios'] != "" && $_POST['area'] != ""  && $_POST['descr'] != ""){
         
         $nombres = $_POST['nombres'];
         $apellido_p = $_POST['apellido_p'];
@@ -107,16 +96,21 @@ if(isset($_POST['guardar'])){
         $exp_anios = $_POST['exp_anios'];
         $area = $_POST['area'];
         $descr = $_POST['descr'];
-
-        $sql = "INSERT INTO especialista(nombres,apellido_p,apellido_m,email,profesion,exp_anios,area,descr)VALUES('$nombres','$apellido_p','$apellido_m','$email','$profesion','$exp_anios','$area','$descr')";
-        $result = mysqli_query($conexion, $sql);	
-        echo '<script>swal("Datos enviados", "Los datos se han enviado con exito, evaluaremos su perfil y nos contectaremos contigo lo mas pronto posible.", "success");</script>';
-        header('location: registro_esp.php');
-    /*}else{
+        
+        $sql = mysqli_query($conexion,"SELECT * FROM especialista WHERE email = '".$email."'");
+        
+        if (mysqli_num_rows($sql) > 0){ 
+            echo '<script>swal("e-mail ya registrado", "Ingresa un correo electronico que no no haya sido registrado antes.", "error");</script>';
+            header("Location:registro_esp.php");
+        }else{
+            $sql = "INSERT INTO especialista(nombres,apellido_p,apellido_m,email,profesion,exp_anios,area,descr)VALUES('$nombres','$apellido_p','$apellido_m','$email','$profesion','$exp_anios','$area','$descr')";
+            $result = mysqli_query($conexion, $sql);
+            echo '<script>swal("Datos enviados", "Los datos se han enviado con exito, evaluaremos su perfil y nos contectaremos contigo lo mas pronto posible.", "success");</script>';
+            header("Location:index.php");
+        }
+    }else{
         echo '<script>swal("Campos vacios", "Por favor llena todos los campos para enviar tu perfil.", "error");</script>';
-        header('location: index.php');
+        header("Location:registro_esp.php");
     }
-    */
-}
-
+}    
 ?>

@@ -14,21 +14,21 @@
     <div class="container"><br>
     <div id="ini_ses" class="card-panel blue-grey lighten-5">
         <blockquote><h2>Inicia sesión</h2></blockquote>
-        <form action="ini_ses.php" method="post">
+        <form name="ini_ses" id="ini_ses" action="ini_ses.php" method="post">
             <div class="row">
                 <div class="input-field col s12 m12 l12">
-                    <input id="email" type="text" class="validate">
+                    <input name="email"  id="email" type="email" class="validate">
                     <label for="email">Correo</label>
                 </div>
                 <div class="input-field col s12 m12 l12">
-                    <input id="pass" type="text" class="validate">
+                    <input name="pass" id="pass" type="password" class="validate">
                     <label for="pass">Contraseña</label>
                 </div>
                 <p><b>Nota: </b> la contraseña le fue asignada el día que fue aprovado en la plataforma. <br>
                 En caso de haber olvidado la contraseña contactese con el administrador.</p><br>
                 <center>
-                    <a class="modal-action modal-close btn red">Cancelar<i class="material-icons right">cancel</i></a>
-                    <button class="btn green" type="submit" name="ini_ses">
+                    <a href="index.php" class="btn red">Cancelar<i class="material-icons right">cancel</i></a>
+                    <button class="btn green" type="submit" id="ini_ses" name="ini_ses">
                         Iniciar Sesión
                         <i class="material-icons right">check</i>
                     </button>
@@ -49,13 +49,34 @@ if(isset($_POST['ini_ses'])){
         $email = $_POST['email'];
         $pass = $_POST['pass'];
 
-        $sql = "INSERT INTO especialista (nombres,apellido_p,apellido_m,email,profesion,exp_anios,area,descr)VALUES('$nombres','$apellido_p','$apellido_m','$email','$profesion','$exp_anios','$area','$descr')";
-        $result = mysqli_query($conexion, $sql);	
-        echo '<script>swal("Datos enviados", "Los datos se han enviado con exito, evaluaremos su perfil y nos contectaremos contigo lo mas pronto posible.", "success");</script>';
-        header('location: registro_esp.php');
+        $sql = mysqli_query($conexion,"SELECT * FROM especialista WHERE email = '".$email."'");
+            
+        if (mysqli_num_rows($sql) == 0){ 
+            echo '<script>swal("Correo no registrado", "Corrobore que el correo este escrito correctamente, no encontramos coincidencias.", "error");</script>';
+            header("Location:ini_ses.php");
+        }else{
+            $row = mysqli_fetch_array($sql);
+            $is_active = $row['is_active'];
+            if($is_active == 0){
+                echo '<script>swal("Cuenta no activa", "Recibimos tu perfil con exito, pero tu cuenta aun no hs sido activada, nos pondremos en contacto contigo cuanto antes.", "error");</script>';
+                header("Location:ini_ses.php");
+            }else{
+                $sql = mysqli_query($conexion,"SELECT * FROM especialista WHERE email = '".$email."' and pass='".$pass."'");
+                if (mysqli_num_rows($sql) == 0){
+                    echo '<script>swal("Contraseña incorrecta", "", "error");</script>';
+                    header("Location:ini_ses.php");
+                }else{
+                    echo '<script>swal("Bienvenido", "", "success");</script>';
+                    $_SESSION['ini_ses']=$email;
+                    header("location: dashboard.php");                 
+                }
+                
+                
+            } 
+        }  
     }else{
-        echo '<script>swal("Campos vacios", "Por favor llena todos los campos para enviar tu perfil.", "error");</script>';
-        header('location: index.php');
+        echo '<script>swal("Campos vacios", "Por favor llena todos los campos para iniciar sesion.", "error");</script>';
+        header("Location:ini_ses.php");
     }
 }
 ?>
