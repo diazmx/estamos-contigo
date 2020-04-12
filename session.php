@@ -10,6 +10,6 @@ $row = mysqli_fetch_assoc($ses_sql);
 $login_session = $row['email'];
 if(!isset($login_session)){
 mysqli_close($conexion); // Cerrando la conexion
-header('Location: index.php'); // Redirecciona a la pagina de inicio
+header('Location: dashboard.php'); // Redirecciona a la pagina de inicio
 }
 ?>

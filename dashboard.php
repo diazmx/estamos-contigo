@@ -1,10 +1,13 @@
 <?php
     session_start();
-    include('session.php');
+    echo $_SESSION["ini_ses"];
+   /* include('session.php');
     if(!$_SESSION['ini_ses']){ 
         echo '<script> alert("Se requiere inicio de sesion para acceder a este apartado");</script>';
-        echo '<script> window.location="index.php";</script>';
+        echo $_SESSION['ini_ses'];
+        //echo '<script> window.location="index.php";</script>';
     }
+    */
 ?>
 
 <!DOCTYPE html>

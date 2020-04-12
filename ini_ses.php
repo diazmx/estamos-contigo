@@ -7,7 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio | #EstamosContigo</title>
-    <?php include('includes/head.php') ?>
+    <?php include('includes/head.php');
+        session_start();// Iniciando Sesion
+    ?>
 </head>
 <body>
     <?php include('includes/nav.php') ?>
@@ -66,8 +68,9 @@ if(isset($_POST['ini_ses'])){
                     echo '<script>swal("Contraseña incorrecta", "", "error");</script>';
                     header("Location:ini_ses.php");
                 }else{
-                    echo '<script>swal("Bienvenido", "", "success");</script>';
-                    $_SESSION['ini_ses']=$email;
+                    //echo '<script>swal("Bienvenido", "", "success");</script>';
+                    
+                    $_SESSION["ini_ses"]=$email;
                     header("location: dashboard.php");                 
                 }
                 
