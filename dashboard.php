@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio | #EstamosContigo</title>
+    <title>Dashboard | #EstamosContigo</title>
     <?php include('includes/head.php') ?>
 </head>
 <body>
