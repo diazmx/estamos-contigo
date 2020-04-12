@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div class="col s12 m6 l6">
-                <img style="width:70%" class="responsive-img" src="images/logo/logobw.png">
+                <img style="width:50%" class="responsive-img" src="images/logo/logobw.png">
             </div>
         </div>
     </div>

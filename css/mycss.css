@@ -2,6 +2,7 @@ html{
     color: #455a64 ;
 }
 
-#paso1 a, #paso2 a, #paso2 button, #paso1 button, #modal_sesion a, #modal_sesion button{
+#paso1 a, #paso2 a, #paso2 button, #paso1 button, #ini_ses a, #ini_ses button{
     margin-top: 10px;
 } 
+ 

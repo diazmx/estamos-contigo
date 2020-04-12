@@ -30,7 +30,7 @@
 <?php
     require ('db/conexion.php');
 
-    $query = mysqli_query($conexion, "SELECT * FROM paciente");
+    $query = mysqli_query($conexion, "SELECT * FROM paciente WHERE id_especilista=1"); //cambiar por id sesion
     while($row = mysqli_fetch_array($query)){
     echo 
         '<tr>

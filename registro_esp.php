@@ -61,6 +61,7 @@
                             <label for="area">Area de especialidad</label>
                         </div>
                         <div class="input-field col s12">
+                            <label for="descr">Cuentanos sobre ti...</label>
                             <textarea placeholder="¿Que te motiva a ayudar las personas en esta situacion?" id="descr" class="materialize-textarea"></textarea>
                         </div>
                     </div>
