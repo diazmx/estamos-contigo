@@ -34,8 +34,6 @@
         Realizando un estudio en conjunto con especialistas en el tema, reunimos a los mejores especilistas en salud clinica, psicologos, psiquiatras, entre otras ramas, para ayudarte a superar estos tiempos de insertidumbre. <br><br>
         </p>
     </div>
-      
-    <?php include('includes/modals.php') ?>
     <?php include('includes/footer.php') ?>
     <?php include('includes/script.php') ?>
 </body>

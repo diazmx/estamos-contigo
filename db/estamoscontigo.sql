@@ -60,6 +60,8 @@ CREATE TABLE `especialista` (
   `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `especialista`(`nombres`, `apellido_p`, `apellido_m`, `email`, `pass`, `profesion`, `exp_anios`, `area`, `descr`) VALUES ('Noelia','Amador','Mendez','noelia@noelia.com','1234','Lic','3 años','todas','whynot');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +83,8 @@ CREATE TABLE `paciente` (
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `paciente`(`alias`, `id_especilista`, `estado_sitacion`) VALUES ('@pedroperez','1','nuevo');
 
 --
 -- Índices para tablas volcadas
